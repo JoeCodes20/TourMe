@@ -1,0 +1,63 @@
+Container(
+                  width: 200,
+                  height: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Card(
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Stack(
+                      fit: StackFit.loose,
+                      children: [
+                        Container(
+                          width: 200.0,
+                          height: 260.0,
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
+                                  image: AssetImage("images/NYimg.jpeg"),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                        Positioned(
+                            top: 270,
+                            left: 4,
+                            child: Container(
+                              constraints: const BoxConstraints(
+                                minWidth: 20,
+                                maxWidth: 120,
+                              ),
+                              child: const Text(
+                                "American Museum of Natural History",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  letterSpacing: 1.5,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )),
+                        Positioned(
+                            left: 4,
+                            bottom: 5,
+                            child: Row(
+                              children: const [
+                                Icon(Icons.location_pin),
+                                Text("New York"),
+                              ],
+                            )),
+                        const Positioned(
+                            bottom: 40,
+                            right: 4,
+                            child: Icon(
+                              Icons.add_circle_outline,
+                              size: 30,
+                            )),
+                        Positioned(
+                            child: Container(
+                          width: 80,
+                        ))
+                      ],
+                    ),
+                  ),
+                )

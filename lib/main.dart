@@ -1,38 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tourme/homeScreen.dart';
-import './sign_up.dart';
+import 'package:tourme/Authentication/sign_in_info.dart';
+import 'package:tourme/Screens/homeScreen.dart';
+import './Authentication/sign_up.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await dotenv.load();
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(home: Builder(builder: (BuildContext context) {
       return Scaffold(
-          body: SafeArea(
-        child: Column(
+        body: Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 30),
-              child: const Text(
-                "TourMe",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-              ),
+                width: double.maxFinite,
+                height: 500,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment(1, -1),
+                      end: Alignment(1, .5),
+                      colors: [Colors.blue, Colors.white10],
+                      stops: [0.0, 0.9]),
+                  color: Colors.blue,
+                )),
+            const SizedBox(
+              height: 80,
             ),
-            Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 20.0),
-              constraints: const BoxConstraints.expand(height: 500.0),
-              width: 300,
-              decoration: const BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("images/tour.png"), fit: BoxFit.cover)),
-            ),
+            // ContentCreators Streaming Platform
+            //Support your favorite creators
             ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(_createRoute());
@@ -41,19 +45,22 @@ class MyApp extends StatelessWidget {
                     shape: const StadiumBorder(),
                     textStyle: const TextStyle(
                         fontSize: 20, fontWeight: FontWeight.bold),
-                    primary: Colors.blue[700],
+                    primary: Color.fromARGB(255, 57, 57, 57),
                     padding: const EdgeInsets.fromLTRB(70, 20, 70, 20)),
-                child: const Text("Sign Up")),
+                child: const Text(
+                  "Create Account",
+                  style: TextStyle(color: Colors.white),
+                )),
             const SizedBox(
-              height: 18.0,
+              height: 25.0,
             ),
             Opacity(
               opacity: .6,
               child: Container(
                 child: GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (c) => const HomeScreen()));
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (c) => SigninInfo()));
                   },
                   child: const Text(
                     "Or Login",
@@ -64,7 +71,7 @@ class MyApp extends StatelessWidget {
             )
           ],
         ),
-      ));
+      );
     }));
   }
 }

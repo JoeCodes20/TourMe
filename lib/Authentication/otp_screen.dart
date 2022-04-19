@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:tourme/homeScreen.dart';
+import 'package:tourme/Authentication/sign_in_info.dart';
+import 'package:tourme/Screens/homeScreen.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key, required this.phone, required this.dialCode})
@@ -115,8 +116,8 @@ class _OtpScreenState extends State<OtpScreen> {
                             verificationId: verificationCode!, smsCode: pin))
                         .then((value) {
                       if (value.user != null) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (c) => const HomeScreen()));
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (c) => HomeScreen()));
                       }
                     });
                   } catch (e) {

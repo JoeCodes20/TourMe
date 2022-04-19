@@ -12,6 +12,7 @@ ios/Runner/GoogleService-info.plist
 .buildlog/
 .history
 .svn/
+.env
 
 # IntelliJ related
 *.iml

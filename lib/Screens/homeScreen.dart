@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:tourme/Screens/navBroadcast.dart';
+import 'package:tourme/Screens/navHome.dart';
+import 'package:tourme/Screens/navSubscriptions.dart';
 import 'package:tourme/main.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,6 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final screens = [
+    const NavHome(),
+    const NavBroadcast(),
+    const NavSubscriptions()
+  ];
+
   void _onItemTap(int index) {
     _selectedIndex = index;
   }
@@ -18,18 +27,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("HomeScreen"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          child: const Text("logout"),
-          onPressed: () {
-            FirebaseAuth.instance.signOut();
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (c) => const MyApp()));
-          },
-        ),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: screens,
       ),
       bottomNavigationBar: BottomNavigationBar(
         onTap: (int index) {
@@ -48,9 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
               label: "Home",
               backgroundColor: Colors.white),
           BottomNavigationBarItem(
-              icon: Icon(Icons.nordic_walking),
-              label: "Tours",
+              icon: Icon(Icons.add_box),
+              label: "Broadcast",
               backgroundColor: Colors.white),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.people), label: "Subscriptions")
         ],
       ),
     );
