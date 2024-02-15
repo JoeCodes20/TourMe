@@ -12,6 +12,7 @@ import 'package:tourme/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    "/* /index.html 200"
     // Build our app and trigger a frame.
     await tester.pumpWidget(const MyApp());
 
